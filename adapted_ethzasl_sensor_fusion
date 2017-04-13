@@ -1,0 +1,5 @@
+rxplot -> rqt_plot 
+
+delete "-b~"
+
+rosrun rqt_reconfigure rqt_reconfigure
