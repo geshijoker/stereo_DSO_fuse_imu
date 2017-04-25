@@ -22,3 +22,40 @@ void PangolinDSOViewer::publishCamPose(FrameShell* frame,		CalibHessian* HCalib)
 allFramePoses.push_back(frame->camToWorld.translation().cast<float>());
 ->camToWorld.translation()
 ...}
+
+camToWorld is defined in KeyFrameDisplay.h as below:
+SE3 camToWorld;
+
+in pose_sensor.h
+void measurementCallback(const geometry_msgs::PoseWithCovarianceStampedConstPtr & msg);
+msg type should be geometry_msgs::PoseWithCovarianceStamped
+
+geometry_msgs::PoseWithCovarianceStamped
+{
+  Header header
+  {
+    uint32 seq
+    time stamp
+    string frame_id
+  }
+  PoseWithCovariance pose
+  {
+    Pose pose
+    {
+      Point position
+      {
+        float64 x
+        float64 y
+        float64 z
+      }
+      Quaternion orientation
+      {
+        float64 x
+        float64 y
+        float64 z
+        float64 w
+      }
+    }
+    float64[36] covariance
+  }
+}
