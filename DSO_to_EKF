@@ -1,0 +1,24 @@
+ROS_DSO:
+main.cpp:
+ros::Subscriber imgSub = nh.subscribe("duo3d/right/image_rect", 16, &vidCb)
+->
+void vidCb(const sensor_msgs::ImageConstPtr img)
+{...
+fullSystem->addActiveFrame(undistImg, frameID);
+->addActiveFrame
+...}
+
+DSO:
+FullSystem.cpp:
+void FullSystem::addActiveFrame( ImageAndExposure* image, int id )
+{...
+ow->publishCamPose(fh->shell, &Hcalib);
+->publishCampose
+...}
+
+PangolinDSOViewer.cpp:
+void PangolinDSOViewer::publishCamPose(FrameShell* frame,		CalibHessian* HCalib)
+{...
+allFramePoses.push_back(frame->camToWorld.translation().cast<float>());
+->camToWorld.translation()
+...}
